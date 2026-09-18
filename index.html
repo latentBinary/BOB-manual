@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Install Bob and learn its Codex and Claude commands.">
+  <meta name="theme-color" content="#111310">
+  <title>Bob — Command Manual</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111310'/%3E%3Cpath d='M18 14h20c9 0 14 4 14 11 0 5-3 8-7 9 6 1 9 5 9 12 0 9-6 13-17 13H18V14Zm12 10v7h7c3 0 5-1 5-4s-2-3-5-3h-7Zm0 17v8h8c4 0 6-1 6-4s-2-4-6-4h-8Z' fill='%23d8ff3e'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to manual</a>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Bob command manual home">
+      <span class="brand-mark">B</span>
+      <span>BOB<span class="brand-slash">/</span>DD</span>
+      <span class="tentative">tentative name</span>
+    </a>
+    <div class="top-meta">
+      <span class="version">v0.3.0</span>
+      <span class="pin">Spec Kit v1.0.2 pinned</span>
+    </div>
+  </header>
+
+  <div class="shell" id="top">
+    <aside class="rail" aria-label="Manual sections">
+      <div class="rail-label">Manual</div>
+      <nav>
+        <a class="active" href="#get-started"><span>01</span> Get started</a>
+        <a href="#install"><span>02</span> Install Bob</a>
+        <a href="#commands"><span>03</span> Commands</a>
+        <a href="#workflow"><span>04</span> Daily workflow</a>
+        <a href="#safety"><span>05</span> Safety</a>
+        <a href="#team"><span>06</span> Team use</a>
+      </nav>
+      <div class="rail-note">
+        <span class="signal"></span>
+        Agent-agnostic SDD<br>for Codex + Claude
+      </div>
+    </aside>
+
+    <main id="main">
+      <section class="hero" id="get-started">
+        <div class="eyebrow">BOB-DRIVEN DEVELOPMENT / FIELD MANUAL</div>
+        <h1>From idea to implementation,<br><span>with the decisions intact.</span></h1>
+        <p class="lede">Bob adds a human-approved specification layer to your application repository. It keeps product intent, system design, research, science, decisions, and delivery work connected in readable Markdown.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#install">Start installation <span>↓</span></a>
+          <a class="button ghost" href="#commands">Browse all 20 commands</a>
+        </div>
+        <div class="principles" aria-label="Core principles">
+          <div><strong>01</strong><span>Review before write</span></div>
+          <div><strong>02</strong><span>Specs stay in your app</span></div>
+          <div><strong>03</strong><span>One workflow, two agents</span></div>
+        </div>
+      </section>
+
+      <section class="manual-section" id="install">
+        <div class="section-heading">
+          <div><span class="section-number">02</span><h2>Install and get started</h2></div>
+          <p>Do the machine setup once. Initialize Bob separately inside each application repository.</p>
+        </div>
+
+        <div class="agent-switch" role="group" aria-label="Choose your coding agent">
+          <span>Show commands for</span>
+          <button class="agent-option selected" data-agent="codex" aria-pressed="true">Codex</button>
+          <button class="agent-option" data-agent="claude" aria-pressed="false">Claude</button>
+        </div>
+
+        <div class="steps">
+          <article class="step">
+            <div class="step-index">1</div>
+            <div class="step-body">
+              <div class="step-kicker">ONCE PER MACHINE</div>
+              <h3>Clone Bob</h3>
+              <p>Clone the private repository through your normal GitHub authentication, then enter the folder.</p>
+              <div class="code-block"><code>git clone https://github.com/latentBinary/Bob.git
+cd Bob</code><button class="copy" data-copy="git clone https://github.com/latentBinary/Bob.git&#10;cd Bob" aria-label="Copy clone commands">Copy</button></div>
+            </div>
+          </article>
+          <article class="step">
+            <div class="step-index">2</div>
+            <div class="step-body">
+              <div class="step-kicker">ONCE PER MACHINE</div>
+              <h3>Install the terminal command</h3>
+              <p>uv builds Bob in an isolated tool environment and makes <code>bob</code> available from other folders.</p>
+              <div class="code-block"><code>uv tool install .</code><button class="copy" data-copy="uv tool install ." aria-label="Copy installation command">Copy</button></div>
+              <details><summary>If your shell cannot find <code>bob</code></summary><div class="detail-body">Run <code>uv tool update-shell</code> once, then open a new terminal.</div></details>
+            </div>
+          </article>
+          <article class="step accent-step">
+            <div class="step-index">3</div>
+            <div class="step-body">
+              <div class="step-kicker">ONCE PER APPLICATION</div>
+              <h3>Initialize your application</h3>
+              <p>Move into your application repository. Bob checks readiness, shows the exact plan, and asks before writing.</p>
+              <div class="code-block"><code id="terminal-init">bob doctor --agent codex
+bob init --agent codex</code><button class="copy" id="copy-terminal-init" data-copy="bob doctor --agent codex&#10;bob init --agent codex" aria-label="Copy initialization commands">Copy</button></div>
+              <div class="next-prompt">Then open the repository in <span data-agent-label>Codex</span> and invoke <code id="agent-init">$bob-init</code>.</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="manual-section" id="commands">
+        <div class="section-heading">
+          <div><span class="section-number">03</span><h2>Command reference</h2></div>
+          <p>Use these inside your coding agent after the terminal setup is complete.</p>
+        </div>
+
+        <div class="command-tools">
+          <label class="search"><span aria-hidden="true">⌕</span><input id="command-search" type="search" placeholder="Search commands or outcomes…" autocomplete="off"></label>
+          <div class="filters" role="group" aria-label="Filter commands">
+            <button class="filter active" data-filter="all" aria-pressed="true">All <span>20</span></button>
+            <button class="filter" data-filter="intent" aria-pressed="false">Product intent <span>10</span></button>
+            <button class="filter" data-filter="lifecycle" aria-pressed="false">Development <span>10</span></button>
+          </div>
+        </div>
+
+        <div class="command-grid" id="command-grid"></div>
+        <div class="no-results" id="no-results" hidden>No commands match that search.</div>
+      </section>
+
+      <section class="manual-section split-section" id="workflow">
+        <div class="section-heading">
+          <div><span class="section-number">04</span><h2>A practical workflow</h2></div>
+        </div>
+        <div class="workflow-board">
+          <div class="flow-item"><span>01</span><div><strong>Define</strong><code data-command="specify">$bob-specify</code><p>Turn an idea into a reviewable feature specification.</p></div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item"><span>02</span><div><strong>Design</strong><code data-command="plan">$bob-plan</code><p>Connect the feature to services and technical choices.</p></div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item"><span>03</span><div><strong>Sequence</strong><code data-command="tasks">$bob-tasks</code><p>Create dependency-ordered implementation work.</p></div></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-item"><span>04</span><div><strong>Build</strong><code data-command="implement">$bob-implement</code><p>Execute only the approved work and validations.</p></div></div>
+        </div>
+      </section>
+
+      <section class="manual-section" id="safety">
+        <div class="section-heading">
+          <div><span class="section-number">05</span><h2>What Bob protects</h2></div>
+          <p>Bob makes its own installation bounded and reviewable. Your coding agent and operating system remain the ultimate enforcement layer.</p>
+        </div>
+        <div class="safety-grid">
+          <article><span class="safety-icon">◎</span><h3>Approval first</h3><p>Initialization stages changes elsewhere, prints every managed target, and writes only after an explicit yes.</p></article>
+          <article><span class="safety-icon">◇</span><h3>Your work stays yours</h3><p>Unrelated custom skills, application Markdown, project tracking, and optional vault notes are preserved.</p></article>
+          <article><span class="safety-icon">↶</span><h3>Recoverable changes</h3><p>Bob writes atomically, records hashes last, and either rolls back a failure or names every unresolved path.</p></article>
+          <article><span class="safety-icon">⌁</span><h3>Pinned foundation</h3><p>Spec Kit v1.0.2 is used at its reviewed immutable commit. Bob does not silently follow a moving release.</p></article>
+        </div>
+      </section>
+
+      <section class="manual-section" id="team">
+        <div class="section-heading">
+          <div><span class="section-number">06</span><h2>Share Bob with your team</h2></div>
+          <p>Application-owned specifications and installed skills travel with the repository.</p>
+        </div>
+        <div class="team-card">
+          <div class="team-track">
+            <div><span>1</span><strong>Review</strong><small>Inspect Bob’s plan and resulting diff.</small></div>
+            <i></i>
+            <div><span>2</span><strong>Commit</strong><small>Commit the approved project-owned files.</small></div>
+            <i></i>
+            <div><span>3</span><strong>Clone</strong><small>Teammates receive the same command surface.</small></div>
+          </div>
+          <div class="team-note"><strong>Adding another agent?</strong><p>Run <code>bob init --agent claude</code> in a Codex project, or the reverse. Bob preserves the existing agent, shared foundation, and custom skills.</p></div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="footer-brand"><span class="brand-mark">B</span><div><strong>Bob-Driven Development</strong><small>Reusable, agent-agnostic, human-approved.</small></div></div>
+        <a href="#top">Back to top ↑</a>
+      </footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied to clipboard</div>
+  <script src="app.js"></script>
+</body>
+</html>
