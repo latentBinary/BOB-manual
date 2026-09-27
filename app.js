@@ -58,6 +58,11 @@ function updateAgent(nextAgent) {
   const terminal = `bob doctor --agent ${agent}\nbob init --agent ${agent}`;
   document.querySelector("#terminal-init").textContent = terminal;
   document.querySelector("#copy-terminal-init").dataset.copy = terminal;
+  document.querySelector("#upgrade-refresh").textContent = terminal;
+  document.querySelector("#copy-upgrade-refresh").dataset.copy = terminal;
+  const diagnostics = `bob --version\nbob doctor --agent ${agent}\nuv --version\ngit --version\ngit status --short\ngit rev-parse --show-toplevel`;
+  document.querySelector("#support-diagnostics").textContent = diagnostics;
+  document.querySelector("#copy-support-diagnostics").dataset.copy = diagnostics;
   document.querySelector("#agent-init").textContent = `${prefix()}bob-init`;
   document.querySelectorAll("[data-command]").forEach(node => node.textContent = `${prefix()}bob-${node.dataset.command}`);
   renderCommands();

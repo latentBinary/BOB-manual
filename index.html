@@ -33,6 +33,8 @@
         <a href="#workflow"><span>04</span> Daily workflow</a>
         <a href="#safety"><span>05</span> Safety</a>
         <a href="#team"><span>06</span> Team use</a>
+        <a href="#upgrade"><span>07</span> Upgrade</a>
+        <a href="#support"><span>08</span> Get support</a>
       </nav>
       <div class="rail-note">
         <span class="signal"></span>
@@ -68,13 +70,20 @@
           <button class="agent-option" data-agent="claude" aria-pressed="false">Claude</button>
         </div>
 
+        <div class="prereq-bar" aria-label="Installation prerequisites">
+          <strong>Before you begin</strong>
+          <span>Git</span>
+          <span>uv 0.12.5 or a reviewed compatible version</span>
+          <span>A reviewed Bob revision or release</span>
+        </div>
+
         <div class="steps">
           <article class="step">
             <div class="step-index">1</div>
             <div class="step-body">
               <div class="step-kicker">ONCE PER MACHINE</div>
               <h3>Clone Bob</h3>
-              <p>Clone the private repository through your normal GitHub authentication, then enter the folder.</p>
+              <p>Clone the Bob repository through your normal GitHub authentication, then enter the folder.</p>
               <div class="code-block"><code>git clone https://github.com/latentBinary/Bob.git
 cd Bob</code><button class="copy" data-copy="git clone https://github.com/latentBinary/Bob.git&#10;cd Bob" aria-label="Copy clone commands">Copy</button></div>
             </div>
@@ -84,8 +93,9 @@ cd Bob</code><button class="copy" data-copy="git clone https://github.com/latent
             <div class="step-body">
               <div class="step-kicker">ONCE PER MACHINE</div>
               <h3>Install the terminal command</h3>
-              <p>uv builds Bob in an isolated tool environment and makes <code>bob</code> available from other folders.</p>
-              <div class="code-block"><code>uv tool install .</code><button class="copy" data-copy="uv tool install ." aria-label="Copy installation command">Copy</button></div>
+              <p>uv builds Bob in an isolated tool environment, makes <code>bob</code> available from other folders, and then verifies the installed command.</p>
+              <div class="code-block"><code>uv tool install .
+bob --version</code><button class="copy" data-copy="uv tool install .&#10;bob --version" aria-label="Copy installation and verification commands">Copy</button></div>
               <details><summary>If your shell cannot find <code>bob</code></summary><div class="detail-body">Run <code>uv tool update-shell</code> once, then open a new terminal.</div></details>
             </div>
           </article>
@@ -167,9 +177,69 @@ bob init --agent codex</code><button class="copy" id="copy-terminal-init" data-c
         </div>
       </section>
 
+      <section class="manual-section" id="upgrade">
+        <div class="section-heading">
+          <div><span class="section-number">07</span><h2>Upgrade or refresh Bob</h2></div>
+          <p>Update the terminal tool first, then build and review a fresh project-local installation plan.</p>
+        </div>
+        <div class="maintenance-grid">
+          <article class="maintenance-card">
+            <span class="step-kicker">TERMINAL TOOL</span>
+            <h3>Install the reviewed update</h3>
+            <p>In the Bob checkout, move to the reviewed revision and replace the uv-managed tool installation.</p>
+            <div class="code-block"><code>git pull
+uv tool install --force .
+bob --version</code><button class="copy" data-copy="git pull&#10;uv tool install --force .&#10;bob --version" aria-label="Copy Bob upgrade commands">Copy</button></div>
+          </article>
+          <article class="maintenance-card">
+            <span class="step-kicker">APPLICATION</span>
+            <h3>Review the project refresh</h3>
+            <p>Run this inside each application. The same <code>bob init</code> command handles both first installation and controlled refresh.</p>
+            <div class="code-block"><code id="upgrade-refresh">bob doctor --agent codex
+bob init --agent codex</code><button class="copy" id="copy-upgrade-refresh" data-copy="bob doctor --agent codex&#10;bob init --agent codex" aria-label="Copy application refresh commands">Copy</button></div>
+          </article>
+        </div>
+        <div class="warning-note"><strong>Removal in v0.3.0</strong><span>The public <code>bob</code> command does not yet provide coordinated removal. Preserve modified files and use Git history plus the installation record for reviewed recovery.</span></div>
+      </section>
+
+      <section class="manual-section" id="support">
+        <div class="section-heading">
+          <div><span class="section-number">08</span><h2>Diagnose and report a failure</h2></div>
+          <p>Preserve evidence first. A complete, sanitized report makes installation, adapter, and workflow failures reproducible.</p>
+        </div>
+        <div class="support-layout">
+          <article class="support-panel">
+            <span class="step-kicker">FIRST RESPONSE</span>
+            <h3>Do not erase the failed state</h3>
+            <ul>
+              <li>Do not immediately rerun with <code>--force</code>.</li>
+              <li>Do not delete generated files, reset Git, or edit the installation record.</li>
+              <li>Never paste PATs, passwords, API keys, cookies, private keys, or <code>.env</code> values.</li>
+              <li>Replace a sensitive value with <code>&lt;redacted&gt;</code> while preserving the rest of the diagnostic line.</li>
+            </ul>
+          </article>
+          <article class="support-panel">
+            <span class="step-kicker">DIAGNOSTICS</span>
+            <h3>Capture the current environment</h3>
+            <div class="code-block"><code id="support-diagnostics">bob --version
+bob doctor --agent codex
+uv --version
+git --version
+git status --short
+git rev-parse --show-toplevel</code><button class="copy" id="copy-support-diagnostics" data-copy="bob --version&#10;bob doctor --agent codex&#10;uv --version&#10;git --version&#10;git status --short&#10;git rev-parse --show-toplevel" aria-label="Copy diagnostic commands">Copy</button></div>
+          </article>
+        </div>
+        <div class="support-actions">
+          <a class="button primary" href="https://github.com/latentBinary/Bob/blob/main/docs/support/bob-failure-report.md">Open failure report template <span>↗</span></a>
+          <a class="button ghost" href="https://github.com/latentBinary/Bob">Open Bob on GitHub <span>↗</span></a>
+          <a class="button ghost" href="https://github.com/latentBinary/Bob#learn-and-maintain">Read complete documentation <span>↗</span></a>
+        </div>
+        <p class="support-footnote">Include the exact command or agent prompt, expected and actual behavior, complete sanitized output, Plan ID, approval state, reproduction steps, affected paths, and recovery actions already attempted. Contributors can submit the completed report with an issue or diagnostic pull request.</p>
+      </section>
+
       <footer>
         <div class="footer-brand"><span class="brand-mark">B</span><div><strong>Bob-Driven Development</strong><small>Reusable, agent-agnostic, human-approved.</small></div></div>
-        <a href="#top">Back to top ↑</a>
+        <div class="footer-links"><a href="https://github.com/latentBinary/Bob">GitHub ↗</a><a href="#top">Back to top ↑</a></div>
       </footer>
     </main>
   </div>
